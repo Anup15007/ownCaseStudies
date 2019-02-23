@@ -7,41 +7,41 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.cg.studentadmission.beans.Student;
+import com.cg.studentadmission.beans.Laptop;
 
-public class StudentDAOImpl implements StudentDAO{
-
+public class LaptopDAOImpl implements LaptopDAO{
 	private EntityManagerFactory  entityManagerFactory =Persistence.createEntityManagerFactory("JPA-PU");
+
 	@Override
-	public Student save(Student student) {
+	public Laptop save(Laptop laptop) {
 		EntityManager   entityManager=entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
-		entityManager.persist(student);
+		entityManager.persist(laptop);
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		return student;
+		return laptop;
 	}
 
 	@Override
-	public boolean update(Student student) {
+	public boolean update(Laptop laptop) {
 		EntityManager   entityManager=entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
-		entityManager.merge(student);
+		entityManager.merge(laptop);
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		return true;
+		return false;
 	}
 
 	@Override
-	public Student findOne(int studentId) {
-		return entityManagerFactory.createEntityManager().find(Student.class, studentId);
+	public Laptop findOne(int laptopId) {
+		return entityManagerFactory.createEntityManager().find(Laptop.class, laptopId);
 	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Student> findAll() {
-		Query query=entityManagerFactory.createEntityManager().createQuery("from Student s");
+	public List<Laptop> findAll() {
+		Query query=entityManagerFactory.createEntityManager().createQuery("from Laptop l");
 		return query.getResultList();
 	}
-
 
 }

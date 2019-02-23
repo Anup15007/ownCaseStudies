@@ -1,15 +1,26 @@
 package com.cg.studentadmission.beans;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Student {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	int studentId;
 	int stuClass;
 	String studentName;
 	String address;
+	
+	@OneToMany(mappedBy="student")
+	private List <Laptop> laptops;
+	
 	public Student() {}	
 	public Student(int stuClass, String studentName, String address) {
 		this.stuClass = stuClass;
